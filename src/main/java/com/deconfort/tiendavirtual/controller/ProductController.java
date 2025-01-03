@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.net.http.HttpRequest;
@@ -34,11 +35,16 @@ public class ProductController {
         return new ModelAndView("listaProductos","productList",productList);
     }
 
-    @RequestMapping("/products/name/{iniciales}")
-    public ModelAndView verLosProductosPorIniciales(@PathVariable String iniciales){
-        List<ProductDTO> productList =productService.getProductsByInit(iniciales);
-        return new ModelAndView("listaProductos","productList",productList);
+    @RequestMapping("/products/name")
+    public ModelAndView verLosProductosPorIniciales(@RequestParam String iniciales) {
+        List<ProductDTO> productList = productService.getProductsByInit(iniciales);
+        ModelAndView modelAndView = new ModelAndView("listaProductos");
+        modelAndView.addObject("productList", productList);
+        modelAndView.addObject("iniciales", iniciales);
+        return modelAndView;
     }
+
+
 
     @RequestMapping("/products/category/{categoria}")
     public ModelAndView verLosProductosPorCategoria(@PathVariable String categoria){
