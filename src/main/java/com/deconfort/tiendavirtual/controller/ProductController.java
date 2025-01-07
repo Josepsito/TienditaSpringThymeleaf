@@ -36,14 +36,13 @@ public class ProductController {
     }
 
     @RequestMapping("/products/name")
-    public ModelAndView verLosProductosPorIniciales(@RequestParam String iniciales) {
-        List<ProductDTO> productList = productService.getProductsByInit(iniciales);
+    public ModelAndView verLosProductosPorIniciales(@RequestParam(name = "iniciales") String inicial) {
+        List<ProductDTO> productList = productService.getProductsByInit(inicial);
         ModelAndView modelAndView = new ModelAndView("listaProductos");
         modelAndView.addObject("productList", productList);
-        modelAndView.addObject("iniciales", iniciales);
+        modelAndView.addObject("iniciales", inicial);
         return modelAndView;
     }
-
 
 
     @RequestMapping("/products/category/{categoria}")
@@ -53,7 +52,7 @@ public class ProductController {
     }
 
     @RequestMapping("/products/{id}")
-    public ModelAndView verLosProductos(@PathVariable int id){
+    public ModelAndView verProductoPorId(@PathVariable int id){
         ProductDTO product =productService.getProductById(id);
         return new ModelAndView("unProducto","product",product);
     }

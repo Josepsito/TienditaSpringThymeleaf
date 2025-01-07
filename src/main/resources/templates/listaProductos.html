@@ -12,7 +12,7 @@
     <h1>Tienda Virtual</h1>
     <p>¡Encuentra tus productos favoritos aquí!</p>
     <form th:action="@{/products/name}" method="get">
-        <input type="text" name="iniciales" placeholder="Escribe iniciales..." th:value="${iniciales}" />
+        <input type="text" name="iniciales" placeholder="Escribe iniciales..." th:value="${iniciales}" required/>
         <button type="submit">Buscar</button>
     </form>
 </header>
@@ -20,7 +20,6 @@
 <main class="container my-5">
     <h2 class="text-center mb-4">Catálogo de Productos</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <!-- Iteración de productos con Thymeleaf -->
         <div class="col" th:each="producto : ${productList}">
             <div class="card h-100">
                 <div class="card-body">
@@ -29,11 +28,11 @@
                     <p class="card-text"><strong>Precio:</strong> $<span th:text="${#numbers.formatDecimal(producto.price, 2, 2)}">0.00</span></p>
                     <p class="card-text"><strong>Stock:</strong> <span th:text="${producto.stock}">0</span> unidades</p>
                     <p class="card-text"><strong>Categoría:</strong> <span th:text="${producto.category}">Categoría</span></p>
+                    <a th:href="@{/products/{id}(id=${producto.id})}" class="btn btn-primary">Ver</a>
                     <button class="btn btn-primary">Añadir al Carrito</button>
                 </div>
             </div>
         </div>
-        <!-- Fin de la iteración -->
     </div>
 </main>
 

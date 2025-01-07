@@ -8,32 +8,18 @@
 </head>
 <body>
 
-<!-- Barra de navegación -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Mi Tienda Virtual</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Carrito <span class="badge bg-secondary" >0</span></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<header class="bg-dark text-white text-center py-3">
+    <h1>Tienda Virtual</h1>
+    <p>¡Encuentra tus productos favoritos aquí!</p>
+    <form th:action="@{/products/name}" method="get">
+        <input type="text" name="iniciales" placeholder="Escribe iniciales..." th:value="${iniciales}" required/>
+        <button type="submit">Buscar</button>
+    </form>
+</header>
 
-<!-- Sección de productos -->
+
 <div class="container my-4">
-    <h1 class="mb-4">Lista de Productos</h1>
+    <h1 th:text="${product.name}" class="mb-4"></h1>
     <div class="row">
         <!-- Bucle para iterar sobre cada producto -->
         <div class="col-md-4 mb-3">
@@ -52,8 +38,7 @@
     </div>
 </div>
 
-<!-- Modal para ver el carrito de compras -->
-<!-- Scripts de Bootstrap -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-n2PcqT23I1gjfYoz/4nL4E+PV0dv6AxRQtKgXGLKhfk+zIMevQpHJgW5yS6z6obY" crossorigin="anonymous"></script>
 
 </body>
