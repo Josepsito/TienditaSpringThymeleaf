@@ -60,7 +60,12 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public List<ProductDTO> getProductsByCategory(String categoria) {
         ProductDTO[] productos= restTemplate.getForObject(urlServidor+"/products/category/"+categoria,ProductDTO[].class);
-        System.out.println(productos);
+        return Arrays.asList(productos);
+    }
+
+    @Override
+    public List<ProductDTO> getProductsByCategoryIniciales(String categoria, String iniciales) {
+        ProductDTO[] productos= restTemplate.getForObject(urlServidor+"/products/category/"+categoria+"/name/"+iniciales,ProductDTO[].class);
         return Arrays.asList(productos);
     }
 }

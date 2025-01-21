@@ -30,6 +30,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDTO> getProductsByCategoryName(String categoria, String iniciales) {
+        return productDAO.getProductsByCategoryIniciales(categoria,iniciales);
+    }
+
+    @Override
     public ProductDTO getProductById(int id) {
         return productDAO.getProductById(id);
     }
@@ -48,4 +53,6 @@ public class ProductServiceImpl implements ProductService {
     public void updateProduct(ProductDTO product) {
         productDAO.updateProduct(product);
     }
+
+
 }

@@ -9,6 +9,9 @@ public interface ProductService {
 
     List<ProductDTO> getProductsByInit(String iniciales);
     List<ProductDTO> getProductsByCategory(String categoria);
+
+    List<ProductDTO> getProductsByCategoryName(String categoria, String iniciales);
+
     ProductDTO getProductById(int id);
     void deleteProductById(int id);
     void createProduct(ProductDTO product);

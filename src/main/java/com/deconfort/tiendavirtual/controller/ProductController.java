@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,8 +20,19 @@ import java.util.List;
 @Controller
 public class ProductController {
 
+    Logger logger = LoggerFactory.getLogger(ProductController.class);
+
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private List<String> categorias;
+
+    @ModelAttribute("categorias")
+    private List<String> modelCategories(){
+        return categorias;
+    }
+
     @RequestMapping
     public ModelAndView verPaginaPrincipal(HttpSession session){
 
@@ -42,6 +55,21 @@ public class ProductController {
         modelAndView.addObject("productList", productList);
         modelAndView.addObject("iniciales", inicial);
         return modelAndView;
+    }
+
+    @RequestMapping("/products/category_name")
+    public ModelAndView verProductosPorInicialesConCategoria(@RequestParam(name = "iniciales",required = false) String iniciales, @RequestParam(name = "categoria",required = false) String categoria){
+
+        List<ProductDTO> productList;
+
+        if (categoria==null||categoria.isEmpty()|| categoria.equals("Selecciona una categoría")) {
+            logger.info(categoria);
+            productList =productService.getProductsByInit(iniciales);
+        }else{
+            productList =productService.getProductsByCategoryName(categoria,iniciales);
+            logger.info("noooooooooooooo");
+        }
+        return new ModelAndView("listaProductos","productList",productList);
     }
 
 
