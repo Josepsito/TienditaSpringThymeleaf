@@ -63,11 +63,11 @@ public class ProductController {
         List<ProductDTO> productList;
 
         if (categoria==null||categoria.isEmpty()|| categoria.equals("Selecciona una categoría")) {
-            logger.info(categoria);
             productList =productService.getProductsByInit(iniciales);
-        }else{
+        } else if (iniciales == null || iniciales.isEmpty()) {
+            productList = productService.getProductsByCategory(categoria);
+        } else{
             productList =productService.getProductsByCategoryName(categoria,iniciales);
-            logger.info("noooooooooooooo");
         }
         return new ModelAndView("listaProductos","productList",productList);
     }

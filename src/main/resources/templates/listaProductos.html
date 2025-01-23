@@ -19,16 +19,13 @@
         <div class="d-flex align-items-center mt-3 mt-md-0">
             <form class="d-flex me-3" th:action="@{/products/category_name}" method="get">
 
-                <!-- Campo de categoría -->
-                <select name="categoria" class="form-select" required>
+                <select name="categoria" class="form-select">
                     <option value="" disabled selected hidden>Selecciona una categoría</option>
                     <option th:each="categoria : ${categorias}" th:value="${categoria}" th:text="${categoria}"></option>
                 </select>
 
-                <!-- Campo de iniciales -->
-                <input type="text" name="iniciales" class="form-control me-2" placeholder="Escribe iniciales..." th:value="${iniciales}" required />
+                <input type="text" name="iniciales" class="form-control me-2" placeholder="Escribe iniciales..." th:value="${iniciales}"/>
 
-                <!-- Botón de submit -->
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
         </div>
